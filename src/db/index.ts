@@ -2,10 +2,10 @@ import { Pool } from "pg";
 import config from "../config";
 
 
+
 export const pool = new Pool({
     connectionString: config.database_url,
 });
-
 
 export const initDB = async () => {
     await pool.query(`
@@ -33,5 +33,5 @@ export const initDB = async () => {
     );
     `)
 
-    console.log("Database connected!")
+    console.log("Database connected successfully!")
 }
