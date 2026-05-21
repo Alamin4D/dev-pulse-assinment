@@ -51,6 +51,7 @@ const getSingleIssue = catchAsync(async (req, res) => {
     });
 });
 
+
 const updateIssue = catchAsync(async (req, res) => {
     const id = Number(req.params.id);
 
