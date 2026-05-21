@@ -20,6 +20,7 @@ const auth = (...roles: string[]) => {
             ) as JwtPayload;
 
             req.user = decoded;
+            
 
             if (
                 roles.length &&
