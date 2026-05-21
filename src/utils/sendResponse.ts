@@ -7,11 +7,7 @@ interface TResponse<T> {
   errors?: unknown;
 }
 
-const sendResponse = <T>(
-  res: Response,
-  statusCode: number,
-  payload: TResponse<T>
-) => {
+const sendResponse = <T>(res: Response, statusCode: number, payload: TResponse<T>) => {
   res.status(statusCode).json(payload);
 };
 

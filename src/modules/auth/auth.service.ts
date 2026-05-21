@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { pool } from "../../db";
 import type { TLoginUser, TRegisterUser } from "./auth.interface";
+import { createToken } from "../../utils/jwt";
 import config from "../../config";
 
 const registerUserIntoDB = async (payload: TRegisterUser) => {
@@ -15,10 +16,7 @@ const registerUserIntoDB = async (payload: TRegisterUser) => {
     throw new Error("User already exists");
   }
 
-  const hashedPassword = await bcrypt.hash(
-    password,
-    config.bcrypt_salt_rounds
-  );
+  const hashedPassword = await bcrypt.hash(password, config.bcrypt_salt_rounds);
 
   const query = `
     INSERT INTO users(name, email, password, role)
@@ -57,28 +55,28 @@ const loginUserFromDB = async (payload: TLoginUser) => {
     throw new Error("Password does not match");
   }
 
-//   const jwtPayload = {
-//     id: user.id,
-//     name: user.name,
-//     role: user.role,
-//   };
+  const jwtPayload = {
+    id: user.id,
+    name: user.name,
+    role: user.role,
+  };
 
-//   const token = createToken(jwtPayload);
+  const token = createToken(jwtPayload);
 
-//   return {
-//     token,
-//     user: {
-//       id: user.id,
-//       name: user.name,
-//       email: user.email,
-//       role: user.role,
-//       created_at: user.created_at,
-//       updated_at: user.updated_at,
-//     },
-//   };
+  return {
+    token,
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+    },
+  };
 };
 
 export const AuthServices = {
-    registerUserIntoDB,
-    loginUserFromDB,
+  registerUserIntoDB,
+  loginUserFromDB,
 }
