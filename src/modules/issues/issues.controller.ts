@@ -18,6 +18,7 @@ const createIssue = catchAsync(async (req, res) => {
     });
 });
 
+
 const getAllIssues = catchAsync(async (req, res) => {
     const { sort, type, status } = req.query;
 
