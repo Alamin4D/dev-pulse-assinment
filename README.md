@@ -5,7 +5,7 @@ DevPulse is a backend API system for software teams to report bugs, suggest feat
 ---
 
 ## 🚀 Live URL
-https://your-deployment-link.com
+https://dev-pulse-assinment.vercel.app/
 
 ---
 
