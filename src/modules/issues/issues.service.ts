@@ -18,23 +18,14 @@ const createIssueIntoDB = async (payload: TIssue, reporterId: number) => {
     RETURNING *
   `;
 
-    const values = [
-        title,
-        description,
-        type,
-        reporterId,
-    ];
+    const values = [title, description, type, reporterId,];
 
     const result = await pool.query(query, values);
 
     return result.rows[0];
 };
 
-const getAllIssuesFromDB = async (
-    sort = "newest",
-    type?: string,
-    status?: string
-) => {
+const getAllIssuesFromDB = async (sort = "newest", type?: string, status?: string) => {
     let query = `SELECT * FROM issues`;
     const conditions: string[] = [];
     const values: string[] = [];
@@ -152,8 +143,7 @@ const updateIssueFromDB = async (id: number, payload: any, user: any) => {
     }
 
     const updatedTitle = payload.title || issue.title;
-    const updatedDescription =
-        payload.description || issue.description;
+    const updatedDescription = payload.description || issue.description;
     const updatedType = payload.type || issue.type;
 
     const result = await pool.query(
